@@ -1,0 +1,1612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HiddenGrooves – Discover Talent That Deserves the Spotlight</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #0f0f18;
+    --bg3: #13131f;
+    --card: #16162a;
+    --gold: #d4a843;
+    --gold2: #f0c060;
+    --gold3: #b8892e;
+    --purple: #7b4ea6;
+    --purple2: #9b6ec6;
+    --purple3: #c49ee0;
+    --text: #f0ede8;
+    --text2: #b8b4ae;
+    --text3: #7a7670;
+    --border: rgba(212,168,67,0.15);
+    --border2: rgba(123,78,166,0.2);
+    --glow: 0 0 40px rgba(212,168,67,0.12);
+    --glow2: 0 0 40px rgba(123,78,166,0.15);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;min-height:100vh}
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar{width:6px}
+  ::-webkit-scrollbar-track{background:var(--bg)}
+  ::-webkit-scrollbar-thumb{background:var(--gold3);border-radius:3px}
+
+  /* TYPOGRAPHY */
+  .display{font-family:'Playfair Display',serif}
+  .serif{font-family:'Cormorant Garamond',serif}
+
+  /* NOISE OVERLAY */
+  body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:0.4}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px 5%;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(10,10,15,0.97),rgba(10,10,15,0));backdrop-filter:blur(12px);border-bottom:1px solid var(--border);transition:all .3s}
+  .nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer}
+  .nav-logo-icon{width:38px;height:38px;background:linear-gradient(135deg,var(--gold),var(--purple));border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:18px;color:#0a0a0f}
+  .nav-logo-text{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;background:linear-gradient(90deg,var(--gold),var(--purple3));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .nav-links{display:flex;gap:32px;list-style:none}
+  .nav-links a{color:var(--text2);text-decoration:none;font-size:.875rem;font-weight:500;letter-spacing:.5px;transition:color .2s;position:relative}
+  .nav-links a:hover{color:var(--gold)}
+  .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s}
+  .nav-links a:hover::after{width:100%}
+  .nav-actions{display:flex;gap:12px;align-items:center}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:8px;font-size:.875rem;font-weight:500;cursor:pointer;transition:all .25s;text-decoration:none;border:none;font-family:'DM Sans',sans-serif}
+  .btn-ghost{background:transparent;color:var(--text2);border:1px solid var(--border)}
+  .btn-ghost:hover{color:var(--gold);border-color:var(--gold)}
+  .btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold3));color:#0a0a0f;font-weight:600}
+  .btn-gold:hover{box-shadow:0 0 30px rgba(212,168,67,0.4);transform:translateY(-1px)}
+  .btn-purple{background:linear-gradient(135deg,var(--purple),var(--purple2));color:#fff}
+  .btn-purple:hover{box-shadow:0 0 30px rgba(123,78,166,0.4);transform:translateY(-1px)}
+  .btn-outline-gold{background:transparent;color:var(--gold);border:1.5px solid var(--gold)}
+  .btn-outline-gold:hover{background:var(--gold);color:#0a0a0f}
+  .btn-lg{padding:14px 32px;font-size:1rem;border-radius:10px}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+  .hamburger span{display:block;width:24px;height:2px;background:var(--text);transition:all .3s}
+
+  /* PAGES */
+  .page{display:none;min-height:100vh;padding-top:80px}
+  .page.active{display:block}
+
+  /* HERO */
+  .hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:0 5%}
+  .hero-bg{position:absolute;inset:0;z-index:0}
+  .hero-bg::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 60% 50%,rgba(123,78,166,0.15) 0%,transparent 70%)}
+  .hero-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 40% at 20% 60%,rgba(212,168,67,0.08) 0%,transparent 60%)}
+  .hero-orb{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(123,78,166,0.12),transparent 70%);right:-100px;top:50%;transform:translateY(-50%);animation:float 8s ease-in-out infinite}
+  .hero-orb2{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(212,168,67,0.08),transparent 70%);left:-50px;bottom:10%;animation:float 10s ease-in-out infinite reverse}
+  @keyframes float{0%,100%{transform:translateY(-50%) scale(1)}50%{transform:translateY(calc(-50% - 20px)) scale(1.05)}}
+  .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(212,168,67,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(212,168,67,0.03) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at center,black,transparent)}
+  .hero-content{position:relative;z-index:1;max-width:680px}
+  .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border:1px solid var(--border);border-radius:50px;font-size:.8rem;color:var(--gold);margin-bottom:28px;background:rgba(212,168,67,0.05)}
+  .hero-badge::before{content:'✦';color:var(--gold)}
+  .hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,6vw,5rem);line-height:1.1;margin-bottom:24px;font-weight:900}
+  .hero-title .accent{background:linear-gradient(135deg,var(--gold),var(--purple3));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .hero-sub{font-size:1.1rem;color:var(--text2);line-height:1.7;margin-bottom:40px;max-width:520px;font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:300}
+  .hero-btns{display:flex;gap:16px;flex-wrap:wrap}
+  .hero-stats{position:absolute;right:5%;bottom:80px;z-index:1;display:flex;flex-direction:column;gap:20px}
+  .stat-card{background:rgba(22,22,42,0.8);border:1px solid var(--border);border-radius:16px;padding:20px 28px;backdrop-filter:blur(16px);text-align:center}
+  .stat-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--gold);display:block}
+  .stat-label{font-size:.78rem;color:var(--text3);letter-spacing:.5px;text-transform:uppercase}
+
+  /* SECTIONS */
+  section{padding:100px 5%}
+  .section-label{font-size:.75rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;font-weight:500}
+  .section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;line-height:1.2;margin-bottom:20px}
+  .section-sub{color:var(--text2);font-size:1rem;line-height:1.7;max-width:560px}
+  .section-header{margin-bottom:60px}
+
+  /* FEATURED ARTISTS */
+  .artists-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
+  .artist-card{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:all .3s;cursor:pointer;position:relative}
+  .artist-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,0.4),var(--glow);border-color:rgba(212,168,67,0.3)}
+  .artist-card-img{height:260px;background:linear-gradient(135deg,#1a1a2e,#2d1f4a);position:relative;overflow:hidden}
+  .artist-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+  .artist-card:hover .artist-card-img img{transform:scale(1.05)}
+  .artist-card-img .overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,15,0.9) 0%,transparent 60%)}
+  .artist-category-badge{position:absolute;top:16px;left:16px;padding:4px 12px;border-radius:50px;font-size:.72rem;font-weight:600;letter-spacing:.5px;text-transform:uppercase}
+  .badge-dancer{background:rgba(212,168,67,0.2);color:var(--gold);border:1px solid rgba(212,168,67,0.3)}
+  .badge-musician{background:rgba(123,78,166,0.2);color:var(--purple3);border:1px solid rgba(123,78,166,0.3)}
+  .badge-performer{background:rgba(196,158,224,0.15);color:var(--purple3);border:1px solid rgba(196,158,224,0.25)}
+  .artist-card-body{padding:20px}
+  .artist-name{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;margin-bottom:4px}
+  .artist-location{font-size:.82rem;color:var(--text3);margin-bottom:12px;display:flex;align-items:center;gap:4px}
+  .artist-meta{display:flex;align-items:center;justify-content:space-between}
+  .rating{display:flex;align-items:center;gap:4px;font-size:.85rem;color:var(--gold)}
+  .price{font-size:.9rem;font-weight:600;color:var(--text2)}
+
+  /* TESTIMONIALS */
+  .testimonials-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px}
+  .testimonial-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:32px;position:relative}
+  .testimonial-card::before{content:'❝';position:absolute;top:20px;right:24px;font-size:3rem;color:var(--gold);opacity:0.2;font-family:serif;line-height:1}
+  .testimonial-text{font-family:'Cormorant Garamond',serif;font-size:1.1rem;line-height:1.7;color:var(--text2);margin-bottom:24px;font-style:italic}
+  .testimonial-author{display:flex;align-items:center;gap:12px}
+  .testimonial-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--purple));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;color:#0a0a0f;flex-shrink:0}
+  .testimonial-name{font-weight:600;font-size:.9rem}
+  .testimonial-role{font-size:.78rem;color:var(--gold)}
+
+  /* HOW IT WORKS */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px}
+  .step{position:relative;text-align:center;padding:32px 24px}
+  .step-num{font-family:'Playfair Display',serif;font-size:4rem;font-weight:900;color:var(--gold);opacity:0.12;position:absolute;top:0;left:50%;transform:translateX(-50%);line-height:1}
+  .step-icon{width:64px;height:64px;border-radius:18px;background:linear-gradient(135deg,rgba(212,168,67,0.1),rgba(123,78,166,0.1));border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 20px;position:relative;z-index:1}
+  .step h3{font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:10px}
+  .step p{font-size:.88rem;color:var(--text2);line-height:1.6}
+
+  /* EXPLORE PAGE */
+  .explore-filters{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:40px;display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end}
+  .filter-group{flex:1;min-width:160px}
+  .filter-label{font-size:.78rem;color:var(--text3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px;font-weight:500}
+  .filter-select,.filter-input{width:100%;padding:10px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.875rem;outline:none;transition:border-color .2s}
+  .filter-select:focus,.filter-input:focus{border-color:var(--gold)}
+  .filter-select option{background:var(--bg3)}
+
+  /* ARTIST PROFILE PAGE */
+  .profile-cover{height:320px;position:relative;overflow:hidden;border-radius:20px;margin-bottom:0}
+  .profile-cover-bg{width:100%;height:100%;object-fit:cover;filter:brightness(0.5)}
+  .profile-cover-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,var(--bg) 100%)}
+  .profile-header{display:flex;align-items:flex-end;gap:28px;padding:0 0 32px 0;margin-top:-80px;position:relative;z-index:1;flex-wrap:wrap}
+  .profile-avatar{width:130px;height:130px;border-radius:20px;border:4px solid var(--gold);object-fit:cover;flex-shrink:0;background:linear-gradient(135deg,var(--gold),var(--purple))}
+  .profile-info h1{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;margin-bottom:4px}
+  .profile-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .tag{padding:4px 14px;border-radius:50px;font-size:.75rem;font-weight:500;border:1px solid var(--border)}
+  .tag-gold{color:var(--gold);border-color:rgba(212,168,67,0.3);background:rgba(212,168,67,0.05)}
+  .tag-purple{color:var(--purple3);border-color:rgba(123,78,166,0.3);background:rgba(123,78,166,0.05)}
+  .profile-grid{display:grid;grid-template-columns:1fr 340px;gap:32px;align-items:start}
+  .profile-main{}
+  .profile-sidebar{}
+  .card-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;margin-bottom:24px}
+  .card-box h3{font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:16px;color:var(--gold)}
+  .video-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .video-thumb{background:var(--bg3);border-radius:10px;height:140px;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;overflow:hidden;border:1px solid var(--border);transition:border-color .2s}
+  .video-thumb:hover{border-color:var(--gold)}
+  .video-play{width:44px;height:44px;background:rgba(212,168,67,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;color:#0a0a0f}
+  .price-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)}
+  .price-row:last-child{border-bottom:none}
+  .price-row .label{font-size:.87rem;color:var(--text2)}
+  .price-row .value{font-weight:600;color:var(--gold)}
+  .calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:8px}
+  .cal-head{font-size:.7rem;color:var(--text3);text-align:center;font-weight:600;letter-spacing:.5px}
+  .cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:6px;font-size:.78rem;cursor:pointer;transition:all .2s}
+  .cal-day:hover{background:rgba(212,168,67,0.15);color:var(--gold)}
+  .cal-day.available{color:var(--text);background:rgba(123,78,166,0.15)}
+  .cal-day.booked{color:var(--text3);background:rgba(255,255,255,0.03);cursor:not-allowed;text-decoration:line-through}
+  .cal-day.today{background:var(--gold);color:#0a0a0f;font-weight:700}
+
+  /* PRICING PAGE */
+  .pricing-toggle{display:flex;align-items:center;gap:12px;margin-bottom:50px;justify-content:center}
+  .toggle-label{font-size:.9rem;color:var(--text2);font-weight:500}
+  .toggle{width:52px;height:28px;background:var(--bg3);border-radius:50px;position:relative;cursor:pointer;border:1px solid var(--border);transition:background .3s}
+  .toggle.active{background:var(--purple)}
+  .toggle-knob{position:absolute;top:3px;left:3px;width:20px;height:20px;background:var(--gold);border-radius:50%;transition:transform .3s}
+  .toggle.active .toggle-knob{transform:translateX(24px)}
+  .pricing-tabs{display:flex;gap:12px;justify-content:center;margin-bottom:48px}
+  .pricing-tab{padding:10px 28px;border-radius:50px;font-size:.875rem;font-weight:500;cursor:pointer;transition:all .25s;border:1px solid var(--border);color:var(--text2)}
+  .pricing-tab.active{background:var(--gold);color:#0a0a0f;border-color:var(--gold)}
+  .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+  .pricing-card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:36px;position:relative;transition:all .3s}
+  .pricing-card.featured{border-color:var(--gold);box-shadow:var(--glow)}
+  .pricing-card.featured::before{content:'Most Popular';position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,var(--gold),var(--gold3));color:#0a0a0f;font-size:.72rem;font-weight:700;padding:4px 16px;border-radius:50px;letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
+  .plan-name{font-size:.78rem;letter-spacing:3px;text-transform:uppercase;color:var(--text3);margin-bottom:12px;font-weight:600}
+  .plan-price{font-family:'Playfair Display',serif;font-size:3rem;font-weight:700;color:var(--text);line-height:1;margin-bottom:6px}
+  .plan-price span{font-size:1.1rem;color:var(--text3);font-family:'DM Sans',sans-serif;font-weight:400}
+  .plan-desc{font-size:.85rem;color:var(--text2);margin-bottom:28px;min-height:40px}
+  .plan-features{list-style:none;margin-bottom:32px}
+  .plan-features li{padding:8px 0;font-size:.875rem;color:var(--text2);display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,0.04)}
+  .plan-features li::before{content:'✦';color:var(--gold);font-size:.7rem;flex-shrink:0}
+  .plan-features li.disabled{color:var(--text3)}
+  .plan-features li.disabled::before{color:var(--text3);content:'✗'}
+  .compare-table{overflow-x:auto;margin-top:60px}
+  .compare-table table{width:100%;border-collapse:collapse;min-width:600px}
+  .compare-table th{padding:16px 20px;font-size:.8rem;letter-spacing:1px;text-transform:uppercase;color:var(--text3);font-weight:600;text-align:left;border-bottom:2px solid var(--border)}
+  .compare-table td{padding:14px 20px;font-size:.875rem;border-bottom:1px solid rgba(255,255,255,0.04)}
+  .compare-table tr:hover td{background:rgba(212,168,67,0.02)}
+  .check-yes{color:var(--gold)}
+  .check-no{color:var(--text3)}
+
+  /* BOOKING */
+  .booking-layout{display:grid;grid-template-columns:1fr 400px;gap:40px;align-items:start}
+  .form-group{margin-bottom:20px}
+  .form-label{display:block;font-size:.82rem;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;font-weight:500}
+  .form-input,.form-select,.form-textarea{width:100%;padding:12px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s}
+  .form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--gold)}
+  .form-textarea{resize:vertical;min-height:120px}
+  .form-select option{background:var(--bg3)}
+  .form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+  /* AUTH */
+  .auth-container{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 20px 60px}
+  .auth-box{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:48px;width:100%;max-width:480px;position:relative;overflow:hidden}
+  .auth-box::before{content:'';position:absolute;top:-50%;right:-50%;width:400px;height:400px;background:radial-gradient(circle,rgba(123,78,166,0.1),transparent 70%);pointer-events:none}
+  .auth-title{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;margin-bottom:8px}
+  .auth-sub{font-size:.9rem;color:var(--text2);margin-bottom:32px}
+  .auth-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:32px}
+  .auth-tab{flex:1;padding:12px;text-align:center;font-size:.875rem;font-weight:500;cursor:pointer;color:var(--text3);border-bottom:2px solid transparent;transition:all .2s;margin-bottom:-1px}
+  .auth-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+  .auth-type-tabs{display:flex;gap:12px;margin-bottom:24px}
+  .type-tab{flex:1;padding:12px;border-radius:10px;border:1px solid var(--border);text-align:center;cursor:pointer;font-size:.875rem;transition:all .2s;color:var(--text2)}
+  .type-tab.active{border-color:var(--gold);color:var(--gold);background:rgba(212,168,67,0.05)}
+
+  /* DASHBOARD */
+  .dashboard-layout{display:grid;grid-template-columns:260px 1fr;min-height:calc(100vh - 80px)}
+  .dashboard-sidebar{background:var(--bg2);border-right:1px solid var(--border);padding:32px 0}
+  .dash-nav{list-style:none}
+  .dash-nav li a,.dash-nav li button{display:flex;align-items:center;gap:12px;padding:12px 24px;font-size:.875rem;color:var(--text2);text-decoration:none;transition:all .2s;cursor:pointer;background:none;border:none;width:100%;text-align:left;font-family:'DM Sans',sans-serif}
+  .dash-nav li a:hover,.dash-nav li button:hover{color:var(--gold);background:rgba(212,168,67,0.05)}
+  .dash-nav li.active a,.dash-nav li.active button{color:var(--gold);background:rgba(212,168,67,0.08);border-right:2px solid var(--gold)}
+  .dash-icon{font-size:1.1rem}
+  .dashboard-main{padding:40px;overflow-y:auto}
+  .dash-greeting{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;margin-bottom:6px}
+  .dash-sub{color:var(--text2);font-size:.9rem;margin-bottom:40px}
+  .metrics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:20px;margin-bottom:40px}
+  .metric-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px}
+  .metric-val{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--gold);display:block;margin-bottom:4px}
+  .metric-label{font-size:.78rem;color:var(--text3);letter-spacing:.5px;text-transform:uppercase}
+  .recent-table{width:100%;border-collapse:collapse}
+  .recent-table th{text-align:left;padding:10px 16px;font-size:.75rem;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)}
+  .recent-table td{padding:14px 16px;font-size:.875rem;border-bottom:1px solid rgba(255,255,255,0.04)}
+  .status-badge{padding:4px 12px;border-radius:50px;font-size:.72rem;font-weight:600}
+  .status-confirmed{background:rgba(52,211,153,0.1);color:#34d399}
+  .status-pending{background:rgba(212,168,67,0.1);color:var(--gold)}
+  .status-cancelled{background:rgba(239,68,68,0.1);color:#ef4444}
+
+  /* ABOUT */
+  .about-hero{padding:120px 5% 80px;text-align:center;position:relative}
+  .about-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at center,rgba(123,78,166,0.12),transparent);pointer-events:none}
+  .values-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px}
+  .value-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px}
+  .value-icon{font-size:2rem;margin-bottom:16px}
+  .value-title{font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:8px}
+  .value-desc{font-size:.875rem;color:var(--text2);line-height:1.6}
+
+  /* CONTACT */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+  .contact-info-item{display:flex;gap:16px;margin-bottom:28px}
+  .contact-icon{width:44px;height:44px;border-radius:12px;background:rgba(212,168,67,0.1);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+  .faq-item{border-bottom:1px solid var(--border);padding:20px 0}
+  .faq-q{font-size:.95rem;font-weight:500;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px}
+  .faq-q::after{content:'﹢';color:var(--gold);font-size:1.3rem;transition:transform .3s;flex-shrink:0}
+  .faq-item.open .faq-q::after{transform:rotate(45deg)}
+  .faq-a{font-size:.875rem;color:var(--text2);line-height:1.7;max-height:0;overflow:hidden;transition:max-height .3s,padding .3s}
+  .faq-item.open .faq-a{max-height:300px;padding-top:12px}
+  .social-links{display:flex;gap:12px;margin-top:24px}
+  .social-btn{width:44px;height:44px;border-radius:12px;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.1rem;cursor:pointer;transition:all .2s;text-decoration:none;color:var(--text)}
+  .social-btn:hover{border-color:var(--gold);color:var(--gold)}
+
+  /* FOOTER */
+  footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 5% 32px}
+  .footer-grid{display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:40px;margin-bottom:48px}
+  .footer-brand p{font-size:.875rem;color:var(--text3);line-height:1.6;margin-top:12px}
+  .footer-col h4{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:16px;font-weight:600}
+  .footer-col ul{list-style:none}
+  .footer-col ul li{margin-bottom:10px}
+  .footer-col ul li a{font-size:.875rem;color:var(--text3);text-decoration:none;transition:color .2s}
+  .footer-col ul li a:hover{color:var(--gold)}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid var(--border);font-size:.8rem;color:var(--text3);flex-wrap:wrap;gap:12px}
+
+  /* NOTIFICATION */
+  .toast{position:fixed;bottom:32px;right:32px;z-index:9998;background:var(--card);border:1px solid var(--gold);border-radius:12px;padding:16px 24px;display:flex;align-items:center;gap:12px;font-size:.875rem;box-shadow:var(--glow);animation:slideUp .3s ease;pointer-events:none;max-width:320px}
+  .toast.hidden{display:none}
+  @keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+  /* MODAL */
+  .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px)}
+  .modal-overlay.hidden{display:none}
+  .modal{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:40px;width:100%;max-width:500px;position:relative;animation:fadeIn .3s ease}
+  @keyframes fadeIn{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}
+  .modal-close{position:absolute;top:16px;right:16px;background:none;border:none;color:var(--text3);font-size:1.4rem;cursor:pointer;padding:4px;line-height:1;transition:color .2s}
+  .modal-close:hover{color:var(--text)}
+
+  /* ANIMATIONS */
+  .fade-in{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+  .fade-in.visible{opacity:1;transform:translateY(0)}
+
+  /* RESPONSIVE */
+  @media(max-width:1024px){
+    .profile-grid{grid-template-columns:1fr}
+    .booking-layout{grid-template-columns:1fr}
+    .contact-grid{grid-template-columns:1fr}
+    .footer-grid{grid-template-columns:1fr 1fr}
+    .dashboard-layout{grid-template-columns:1fr}
+    .dashboard-sidebar{display:none}
+    .hero-stats{display:none}
+  }
+  @media(max-width:768px){
+    .nav-links{display:none}
+    .hamburger{display:flex}
+    .hero-title{font-size:2.4rem}
+    .hero-btns{flex-direction:column;align-items:flex-start}
+    .footer-grid{grid-template-columns:1fr}
+    .form-grid-2{grid-template-columns:1fr}
+    .pricing-grid{grid-template-columns:1fr}
+    .explore-filters{flex-direction:column}
+  }
+  .mobile-menu{display:none;position:fixed;inset:0;background:var(--bg);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:32px}
+  .mobile-menu.open{display:flex}
+  .mobile-menu a{font-family:'Playfair Display',serif;font-size:2rem;color:var(--text);text-decoration:none;transition:color .2s}
+  .mobile-menu a:hover{color:var(--gold)}
+  .mobile-menu-close{position:absolute;top:24px;right:24px;font-size:1.8rem;cursor:pointer;color:var(--text)}
+
+  /* ADMIN INDICATOR */
+  .admin-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:50px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#ef4444;font-size:.72rem;font-weight:600;letter-spacing:.5px;text-transform:uppercase}
+
+  /* DIVIDER */
+  .gold-divider{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:80px 0;opacity:0.3}
+  .section-divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:60px 0}
+
+  /* HIGHLIGHT */
+  .highlight-box{background:linear-gradient(135deg,rgba(212,168,67,0.05),rgba(123,78,166,0.05));border:1px solid var(--border);border-radius:20px;padding:48px;text-align:center;position:relative;overflow:hidden}
+  .highlight-box::before{content:'';position:absolute;top:-50%;right:-20%;width:300px;height:300px;background:radial-gradient(circle,rgba(212,168,67,0.08),transparent 70%)}
+  .highlight-box::after{content:'';position:absolute;bottom:-50%;left:-20%;width:300px;height:300px;background:radial-gradient(circle,rgba(123,78,166,0.08),transparent 70%)}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav id="mainNav">
+  <div class="nav-logo" onclick="showPage('home')">
+    <div class="nav-logo-icon">H</div>
+    <span class="nav-logo-text">HiddenGrooves</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('home')">Home</a></li>
+    <li><a href="#" onclick="showPage('explore')">Explore Artists</a></li>
+    <li><a href="#" onclick="showPage('pricing')">Pricing</a></li>
+    <li><a href="#" onclick="showPage('booking')">Book Now</a></li>
+    <li><a href="#" onclick="showPage('about')">About</a></li>
+    <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <span id="adminBadgeNav" class="admin-badge" style="display:none">⚙ Admin</span>
+    <button class="btn btn-ghost" id="navLoginBtn" onclick="showPage('login')">Sign In</button>
+    <button class="btn btn-gold" onclick="showPage('login')">Join Free</button>
+    <div class="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <span class="mobile-menu-close" onclick="toggleMobileMenu()">✕</span>
+  <a href="#" onclick="showPage('home');toggleMobileMenu()">Home</a>
+  <a href="#" onclick="showPage('explore');toggleMobileMenu()">Explore Artists</a>
+  <a href="#" onclick="showPage('pricing');toggleMobileMenu()">Pricing</a>
+  <a href="#" onclick="showPage('booking');toggleMobileMenu()">Book Now</a>
+  <a href="#" onclick="showPage('about');toggleMobileMenu()">About</a>
+  <a href="#" onclick="showPage('contact');toggleMobileMenu()">Contact</a>
+</div>
+
+<!-- ===================== HOME PAGE ===================== -->
+<div id="page-home" class="page active">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="hero-orb"></div>
+      <div class="hero-orb2"></div>
+      <div class="hero-grid"></div>
+    </div>
+    <div class="hero-content fade-in">
+      <div class="hero-badge">India's Premier Artist Discovery Platform</div>
+      <h1 class="hero-title display">
+        Discover <span class="accent">Talent</span><br>That Deserves the<br>Spotlight.
+      </h1>
+      <p class="hero-sub">Connecting passionate, undervalued dancers and independent artists with the events and audiences they were born to captivate.</p>
+      <div class="hero-btns">
+        <button class="btn btn-gold btn-lg" onclick="showPage('explore')">✦ Explore Artists</button>
+        <button class="btn btn-outline-gold btn-lg" onclick="showPage('login')">Join as an Artist</button>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card fade-in">
+        <span class="stat-num">1,200+</span>
+        <span class="stat-label">Verified Artists</span>
+      </div>
+      <div class="stat-card fade-in">
+        <span class="stat-num">850+</span>
+        <span class="stat-label">Events Booked</span>
+      </div>
+      <div class="stat-card fade-in">
+        <span class="stat-num">4.9★</span>
+        <span class="stat-label">Avg. Rating</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section style="background:var(--bg2)">
+    <div class="section-header text-center" style="text-align:center">
+      <div class="section-label">The Process</div>
+      <h2 class="section-title display" style="margin:0 auto 12px">How HiddenGrooves Works</h2>
+      <p class="section-sub" style="margin:0 auto">A seamless journey from discovery to performance</p>
+    </div>
+    <div class="steps">
+      <div class="step fade-in">
+        <div class="step-num">01</div>
+        <div class="step-icon">🔍</div>
+        <h3 class="display">Discover</h3>
+        <p>Browse hundreds of verified artists by category, location, price range, and performance type.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-num">02</div>
+        <div class="step-icon">🎬</div>
+        <h3 class="display">Preview</h3>
+        <p>Watch performance videos, read bios, and review artist portfolios before reaching out.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-num">03</div>
+        <div class="step-icon">📅</div>
+        <h3 class="display">Book</h3>
+        <p>Submit a booking request, chat directly with the artist, and confirm availability instantly.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-num">04</div>
+        <div class="step-icon">✨</div>
+        <h3 class="display">Perform</h3>
+        <p>Your event comes alive with extraordinary talent that was waiting for exactly this moment.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED ARTISTS -->
+  <section>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;margin-bottom:48px">
+      <div>
+        <div class="section-label">Featured Talent</div>
+        <h2 class="section-title display" style="margin:0">Artists in the Spotlight</h2>
+      </div>
+      <button class="btn btn-ghost" onclick="showPage('explore')">View All Artists →</button>
+    </div>
+    <div class="artists-grid">
+      <div class="artist-card fade-in" onclick="showPage('profile')">
+        <div class="artist-card-img">
+          <div style="width:100%;height:100%;background:linear-gradient(135deg,#1a0a2e 0%,#3d1a6e 50%,#1a0a2e 100%);display:flex;align-items:center;justify-content:center;font-size:4rem">💃</div>
+          <div class="overlay"></div>
+          <span class="artist-category-badge badge-dancer">Dancer</span>
+        </div>
+        <div class="artist-card-body">
+          <div class="artist-name display">Priya Nair</div>
+          <div class="artist-location">📍 Bengaluru, Karnataka</div>
+          <div class="artist-meta">
+            <div class="rating">★★★★★ <span style="color:var(--text3)">4.9 (124)</span></div>
+            <div class="price" style="color:var(--gold)">₹8,000/event</div>
+          </div>
+        </div>
+      </div>
+      <div class="artist-card fade-in" onclick="showPage('profile')">
+        <div class="artist-card-img">
+          <div style="width:100%;height:100%;background:linear-gradient(135deg,#0a1a2e 0%,#1a3a6e 50%,#0a1a2e 100%);display:flex;align-items:center;justify-content:center;font-size:4rem">🎸</div>
+          <div class="overlay"></div>
+          <span class="artist-category-badge badge-musician">Musician</span>
+        </div>
+        <div class="artist-card-body">
+          <div class="artist-name display">Arjun Sharma</div>
+          <div class="artist-location">📍 Mumbai, Maharashtra</div>
+          <div class="artist-meta">
+            <div class="rating">★★★★★ <span style="color:var(--text3)">4.8 (89)</span></div>
+            <div class="price" style="color:var(--gold)">₹12,000/event</div>
+          </div>
+        </div>
+      </div>
+      <div class="artist-card fade-in" onclick="showPage('profile')">
+        <div class="artist-card-img">
+          <div style="width:100%;height:100%;background:linear-gradient(135deg,#1a1a0a 0%,#4e3a0a 50%,#1a1a0a 100%);display:flex;align-items:center;justify-content:center;font-size:4rem">🎭</div>
+          <div class="overlay"></div>
+          <span class="artist-category-badge badge-performer">Performer</span>
+        </div>
+        <div class="artist-card-body">
+          <div class="artist-name display">Meera Pillai</div>
+          <div class="artist-location">📍 Chennai, Tamil Nadu</div>
+          <div class="artist-meta">
+            <div class="rating">★★★★★ <span style="color:var(--text3)">5.0 (67)</span></div>
+            <div class="price" style="color:var(--gold)">₹15,000/event</div>
+          </div>
+        </div>
+      </div>
+      <div class="artist-card fade-in" onclick="showPage('profile')">
+        <div class="artist-card-img">
+          <div style="width:100%;height:100%;background:linear-gradient(135deg,#2e0a1a 0%,#6e1a3d 50%,#2e0a1a 100%);display:flex;align-items:center;justify-content:center;font-size:4rem">🪘</div>
+          <div class="overlay"></div>
+          <span class="artist-category-badge badge-musician">Musician</span>
+        </div>
+        <div class="artist-card-body">
+          <div class="artist-name display">Karan Mehta</div>
+          <div class="artist-location">📍 Delhi, NCR</div>
+          <div class="artist-meta">
+            <div class="rating">★★★★☆ <span style="color:var(--text3)">4.7 (52)</span></div>
+            <div class="price" style="color:var(--gold)">₹6,500/event</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section style="background:var(--bg2)">
+    <div class="section-header">
+      <div class="section-label">What People Say</div>
+      <h2 class="section-title display">Voices from the Community</h2>
+      <p class="section-sub">From the artists who found their stage to the organizers who found their star.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-in">
+        <p class="testimonial-text">"HiddenGrooves completely changed my career. I had been performing at local events for years with no recognition. Within two months on the platform, I had five bookings and a wedding performance that led to my biggest opportunity yet."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">P</div>
+          <div><div class="testimonial-name">Priya Nair</div><div class="testimonial-role">Classical Dancer • Bengaluru</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-in">
+        <p class="testimonial-text">"I was organizing a 500-person cultural gala and needed authentic classical performers. HiddenGrooves helped me find three brilliant artists within 48 hours. The booking process was flawless."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background:linear-gradient(135deg,var(--purple),var(--purple2))">R</div>
+          <div><div class="testimonial-name">Ravi Krishnamurthy</div><div class="testimonial-role">Event Organizer • Chennai</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-in">
+        <p class="testimonial-text">"The Pro subscription was worth every rupee. My profile visibility tripled, and I now appear at the top of search results for 'folk musicians' in my city. Steady bookings every weekend."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background:linear-gradient(135deg,#b8892e,#d4a843)">K</div>
+          <div><div class="testimonial-name">Karan Mehta</div><div class="testimonial-role">Folk Musician • Delhi</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section>
+    <div class="highlight-box fade-in">
+      <div style="position:relative;z-index:1">
+        <div class="section-label" style="margin-bottom:16px">Ready to Begin?</div>
+        <h2 class="display" style="font-size:clamp(2rem,4vw,3rem);font-weight:900;margin-bottom:16px">Your Stage is Waiting</h2>
+        <p style="color:var(--text2);margin-bottom:36px;font-family:'Cormorant Garamond',serif;font-size:1.2rem;max-width:500px;margin-left:auto;margin-right:auto">Whether you're a hidden talent ready to shine, or an organizer searching for the perfect performer — HiddenGrooves is where great stories begin.</p>
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+          <button class="btn btn-gold btn-lg" onclick="showPage('login')">Join as an Artist</button>
+          <button class="btn btn-purple btn-lg" onclick="showPage('explore')">Find Performers</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom:12px">
+          <div class="nav-logo-icon">H</div>
+          <span class="nav-logo-text">HiddenGrooves</span>
+        </div>
+        <p>India's premier subscription-based marketplace connecting undervalued artists with the professional opportunities they deserve.</p>
+        <div class="social-links">
+          <a class="social-btn" title="Instagram">📸</a>
+          <a class="social-btn" title="Twitter">🐦</a>
+          <a class="social-btn" title="YouTube">▶️</a>
+          <a class="social-btn" title="LinkedIn">💼</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="#" onclick="showPage('explore')">Explore Artists</a></li>
+          <li><a href="#" onclick="showPage('pricing')">Pricing Plans</a></li>
+          <li><a href="#" onclick="showPage('booking')">Book a Performer</a></li>
+          <li><a href="#" onclick="showPage('login')">Artist Sign Up</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#" onclick="showPage('about')">About Us</a></li>
+          <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+          <li><a href="#">Refund Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 HiddenGrooves. All rights reserved.</span>
+      <span>Made with ♥ for artists who deserve the spotlight</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ===================== EXPLORE PAGE ===================== -->
+<div id="page-explore" class="page">
+  <section style="padding-top:120px">
+    <div class="section-header">
+      <div class="section-label">Browse</div>
+      <h1 class="section-title display">Explore Artists</h1>
+      <p class="section-sub">Discover talented performers across India — filtered exactly how you need them.</p>
+    </div>
+    <div class="explore-filters fade-in">
+      <div class="filter-group">
+        <div class="filter-label">City</div>
+        <select class="filter-select">
+          <option value="">All Cities</option>
+          <option>Bengaluru</option><option>Mumbai</option><option>Delhi</option>
+          <option>Chennai</option><option>Hyderabad</option><option>Pune</option>
+          <option>Kolkata</option><option>Jaipur</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <div class="filter-label">Performance Type</div>
+        <select class="filter-select">
+          <option value="">All Types</option>
+          <option>Classical Dance</option><option>Folk Dance</option><option>Contemporary</option>
+          <option>Live Music</option><option>Stand-up Comedy</option><option>Theatre</option>
+          <option>Acrobatics</option><option>Spoken Word</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <div class="filter-label">Price Range</div>
+        <select class="filter-select">
+          <option value="">Any Budget</option>
+          <option>Under ₹5,000</option><option>₹5,000–₹10,000</option>
+          <option>₹10,000–₹25,000</option><option>₹25,000+</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <div class="filter-label">Rating</div>
+        <select class="filter-select">
+          <option value="">Any Rating</option>
+          <option>5 Stars</option><option>4+ Stars</option><option>3+ Stars</option>
+        </select>
+      </div>
+      <div class="filter-group" style="flex:0;min-width:auto">
+        <div class="filter-label" style="opacity:0">Search</div>
+        <button class="btn btn-gold" style="white-space:nowrap">Apply Filters</button>
+      </div>
+    </div>
+    <div id="exploreGrid" class="artists-grid">
+      <!-- Populated by JS -->
+    </div>
+  </section>
+  <!-- Footer repeated -->
+  <footer style="margin-top:60px">
+    <div class="footer-bottom"><span>© 2025 HiddenGrooves</span><button class="btn btn-ghost" onclick="showPage('home')" style="font-size:.8rem;padding:6px 14px">← Back to Home</button></div>
+  </footer>
+</div>
+
+<!-- ===================== ARTIST PROFILE PAGE ===================== -->
+<div id="page-profile" class="page">
+  <section style="padding-top:100px">
+    <div class="profile-cover">
+      <div style="width:100%;height:100%;background:linear-gradient(135deg,#1a0a2e,#3d1a6e,#0a1a3e);border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:6rem;position:relative">
+        💃
+        <div class="profile-cover-overlay"></div>
+      </div>
+    </div>
+    <div class="profile-header">
+      <div class="profile-avatar" style="background:linear-gradient(135deg,#3d1a6e,#1a0a2e);display:flex;align-items:center;justify-content:center;font-size:3.5rem">💃</div>
+      <div class="profile-info">
+        <h1 class="display">Priya Nair</h1>
+        <div style="color:var(--text2);font-size:.9rem;margin-bottom:6px">📍 Bengaluru, Karnataka &nbsp;•&nbsp; ★ 4.9 (124 reviews) &nbsp;•&nbsp; <span style="color:var(--gold)">Pro Artist</span></div>
+        <div class="profile-tags">
+          <span class="tag tag-gold">Classical Dance</span>
+          <span class="tag tag-gold">Bharatanatyam</span>
+          <span class="tag tag-purple">Kuchipudi</span>
+          <span class="tag tag-purple">Folk Fusion</span>
+          <span class="tag tag-gold">Weddings</span>
+          <span class="tag tag-gold">Cultural Events</span>
+        </div>
+      </div>
+      <div style="margin-left:auto"><button class="btn btn-gold btn-lg" onclick="showPage('booking')">📅 Book Priya</button></div>
+    </div>
+
+    <div class="profile-grid">
+      <div class="profile-main">
+        <div class="card-box fade-in">
+          <h3>About Priya</h3>
+          <p style="color:var(--text2);line-height:1.8;font-size:.93rem">Priya Nair is an award-winning classical dancer with over 15 years of training in Bharatanatyam and Kuchipudi. Trained under Guru Padmashree Saroja Vaidyanathan, she brings an authentic, emotionally rich performance to every stage. Priya has performed at the India International Centre, Nrityagram, and numerous cultural festivals across South India. Her unique fusion of classical vocabulary with contemporary narrative has earned her recognition across artistic communities.</p>
+          <p style="color:var(--text2);line-height:1.8;font-size:.93rem;margin-top:12px">She specializes in thematic solo performances, wedding sangeet choreography, and cultural evening showcases. Each performance is customized to the event's emotional and cultural context.</p>
+        </div>
+        <div class="card-box fade-in">
+          <h3>Performance Videos</h3>
+          <div class="video-grid">
+            <div class="video-thumb" style="background:linear-gradient(135deg,#1a0a2e,#3d1a6e)">
+              <div class="video-play">▶</div>
+            </div>
+            <div class="video-thumb" style="background:linear-gradient(135deg,#0a1a2e,#1a3a6e)">
+              <div class="video-play">▶</div>
+            </div>
+            <div class="video-thumb" style="background:linear-gradient(135deg,#1a1a0a,#4e3a0a)">
+              <div class="video-play">▶</div>
+            </div>
+            <div class="video-thumb" style="background:linear-gradient(135deg,#2e0a1a,#6e1a3d)">
+              <div class="video-play">▶</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-box fade-in">
+          <h3>Recent Reviews</h3>
+          <div style="display:flex;flex-direction:column;gap:20px">
+            <div style="padding-bottom:20px;border-bottom:1px solid var(--border)">
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-weight:600;font-size:.9rem">Rahul Verma</span><span style="color:var(--gold);font-size:.85rem">★★★★★</span></div>
+              <p style="font-size:.875rem;color:var(--text2);line-height:1.6;font-style:italic">"Priya's performance at our daughter's wedding was the highlight of the entire evening. Absolutely breathtaking."</p>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-weight:600;font-size:.9rem">Ananya Events</span><span style="color:var(--gold);font-size:.85rem">★★★★★</span></div>
+              <p style="font-size:.875rem;color:var(--text2);line-height:1.6;font-style:italic">"Professional, punctual, and phenomenally talented. Our guests couldn't stop talking about her. Highly recommended."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="profile-sidebar">
+        <div class="card-box fade-in">
+          <h3>Pricing</h3>
+          <div class="price-row"><span class="label">Solo Performance (1 hr)</span><span class="value">₹8,000</span></div>
+          <div class="price-row"><span class="label">Extended Show (2 hrs)</span><span class="value">₹14,000</span></div>
+          <div class="price-row"><span class="label">Wedding Package</span><span class="value">₹22,000</span></div>
+          <div class="price-row"><span class="label">Travel (outside city)</span><span class="value">₹2,500+</span></div>
+          <button class="btn btn-gold" style="width:100%;margin-top:16px;justify-content:center" onclick="showPage('booking')">Request Booking</button>
+        </div>
+        <div class="card-box fade-in">
+          <h3>Availability — April 2025</h3>
+          <div class="calendar">
+            <div class="cal-head">S</div><div class="cal-head">M</div><div class="cal-head">T</div>
+            <div class="cal-head">W</div><div class="cal-head">T</div><div class="cal-head">F</div><div class="cal-head">S</div>
+          </div>
+          <div class="calendar" id="miniCalendar"></div>
+          <div style="display:flex;gap:12px;margin-top:12px;font-size:.75rem">
+            <span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:3px;background:rgba(123,78,166,0.3);display:inline-block"></span>Available</span>
+            <span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:3px;background:rgba(212,168,67,0.9);display:inline-block"></span>Today</span>
+            <span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:3px;background:rgba(255,255,255,0.05);display:inline-block"></span>Booked</span>
+          </div>
+        </div>
+        <div class="card-box fade-in">
+          <h3>Quick Facts</h3>
+          <div class="price-row"><span class="label">Experience</span><span class="value" style="color:var(--text)">15+ years</span></div>
+          <div class="price-row"><span class="label">Events Done</span><span class="value" style="color:var(--text)">320+</span></div>
+          <div class="price-row"><span class="label">Languages</span><span class="value" style="color:var(--text)">Hindi, Tamil, English</span></div>
+          <div class="price-row"><span class="label">Response Time</span><span class="value" style="color:#34d399">Usually &lt;2 hrs</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer style="margin-top:40px"><div class="footer-bottom"><span>© 2025 HiddenGrooves</span><button class="btn btn-ghost" onclick="showPage('explore')" style="font-size:.8rem;padding:6px 14px">← Back to Explore</button></div></footer>
+</div>
+
+<!-- ===================== PRICING PAGE ===================== -->
+<div id="page-pricing" class="page">
+  <section style="padding-top:120px">
+    <div class="section-header" style="text-align:center">
+      <div class="section-label">Subscription Plans</div>
+      <h1 class="section-title display" style="margin:0 auto 12px">Invest in Your Art.<br>Or Your Next Big Event.</h1>
+      <p class="section-sub" style="margin:0 auto">Flexible plans designed for every stage of your journey.</p>
+    </div>
+    <div class="pricing-tabs">
+      <div class="pricing-tab active" onclick="switchPricingTab(this,'artist')">For Artists</div>
+      <div class="pricing-tab" onclick="switchPricingTab(this,'organizer')">For Organizers</div>
+    </div>
+
+    <!-- ARTIST PLANS -->
+    <div id="artistPlans">
+      <div class="pricing-grid">
+        <div class="pricing-card fade-in">
+          <div class="plan-name">Free</div>
+          <div class="plan-price">₹0 <span>/ month</span></div>
+          <div class="plan-desc">Start building your presence. Perfect for artists just joining the platform.</div>
+          <ul class="plan-features">
+            <li>Basic profile with 1 photo</li>
+            <li>1 performance video upload</li>
+            <li>Appear in general search</li>
+            <li>Receive booking requests</li>
+            <li class="disabled">Priority search ranking</li>
+            <li class="disabled">Analytics dashboard</li>
+            <li class="disabled">Featured listing</li>
+            <li class="disabled">Unlimited media uploads</li>
+          </ul>
+          <button class="btn btn-outline-gold" style="width:100%;justify-content:center" onclick="showPage('login')">Get Started Free</button>
+        </div>
+        <div class="pricing-card featured fade-in">
+          <div class="plan-name">Pro</div>
+          <div class="plan-price">₹499 <span>/ month</span></div>
+          <div class="plan-desc">Boost your visibility and attract quality bookings consistently.</div>
+          <ul class="plan-features">
+            <li>Everything in Free</li>
+            <li>Up to 10 photos &amp; 5 videos</li>
+            <li>Higher search ranking</li>
+            <li>Booking enquiry analytics</li>
+            <li>Custom bio with rich formatting</li>
+            <li>Badge: "Pro Artist"</li>
+            <li class="disabled">Featured homepage listing</li>
+            <li class="disabled">Priority booking visibility</li>
+          </ul>
+          <button class="btn btn-gold" style="width:100%;justify-content:center" onclick="showToast('Redirecting to payment…')">Subscribe Now</button>
+        </div>
+        <div class="pricing-card fade-in">
+          <div class="plan-name">Premium</div>
+          <div class="plan-price">₹999 <span>/ month</span></div>
+          <div class="plan-desc">The full spotlight experience for serious professional artists.</div>
+          <ul class="plan-features">
+            <li>Everything in Pro</li>
+            <li>Unlimited photos &amp; videos</li>
+            <li>Featured homepage listing</li>
+            <li>Priority in all searches</li>
+            <li>Advanced analytics</li>
+            <li>Priority booking notifications</li>
+            <li>Badge: "Premium Artist ✦"</li>
+            <li>Dedicated support manager</li>
+          </ul>
+          <button class="btn btn-purple" style="width:100%;justify-content:center" onclick="showToast('Redirecting to payment…')">Subscribe Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ORGANIZER PLANS -->
+    <div id="organizerPlans" style="display:none">
+      <div class="pricing-grid">
+        <div class="pricing-card fade-in">
+          <div class="plan-name">Free</div>
+          <div class="plan-price">₹0 <span>/ month</span></div>
+          <div class="plan-desc">Browse artists and explore what the platform offers.</div>
+          <ul class="plan-features">
+            <li>Browse artist listings</li>
+            <li>View public profiles</li>
+            <li>Save up to 3 favorites</li>
+            <li class="disabled">Direct artist contact</li>
+            <li class="disabled">Full booking tools</li>
+            <li class="disabled">Bulk event management</li>
+          </ul>
+          <button class="btn btn-outline-gold" style="width:100%;justify-content:center" onclick="showPage('login')">Start Free</button>
+        </div>
+        <div class="pricing-card featured fade-in">
+          <div class="plan-name">Pro</div>
+          <div class="plan-price">₹799 <span>/ month</span></div>
+          <div class="plan-desc">Full access to book, communicate, and manage artists for your events.</div>
+          <ul class="plan-features">
+            <li>Unlimited artist browsing</li>
+            <li>Direct messaging with artists</li>
+            <li>Full booking request system</li>
+            <li>Save unlimited favorites</li>
+            <li>Booking history &amp; management</li>
+            <li>Email notifications</li>
+            <li class="disabled">Bulk booking tools</li>
+            <li class="disabled">Dedicated account manager</li>
+          </ul>
+          <button class="btn btn-gold" style="width:100%;justify-content:center" onclick="showToast('Redirecting to payment…')">Subscribe Now</button>
+        </div>
+        <div class="pricing-card fade-in">
+          <div class="plan-name">Enterprise</div>
+          <div class="plan-price">₹2,499 <span>/ month</span></div>
+          <div class="plan-desc">For agencies, production houses, and high-volume event organizers.</div>
+          <ul class="plan-features">
+            <li>Everything in Pro</li>
+            <li>Bulk booking management</li>
+            <li>Multi-event calendar</li>
+            <li>Team collaboration (5 users)</li>
+            <li>Invoice &amp; contract templates</li>
+            <li>Dedicated account manager</li>
+            <li>API access</li>
+            <li>Custom integration support</li>
+          </ul>
+          <button class="btn btn-purple" style="width:100%;justify-content:center" onclick="showToast('Contact us for Enterprise setup')">Contact Sales</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPARISON TABLE -->
+    <div class="compare-table fade-in" style="margin-top:80px">
+      <h2 class="display" style="font-size:1.8rem;margin-bottom:32px;text-align:center">Feature Comparison</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th style="color:var(--text2)">Free</th>
+            <th style="color:var(--gold)">Pro</th>
+            <th style="color:var(--purple3)">Premium</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Profile creation</td><td class="check-yes">✦</td><td class="check-yes">✦</td><td class="check-yes">✦</td></tr>
+          <tr><td>Video uploads</td><td style="color:var(--text2)">1</td><td style="color:var(--text2)">5</td><td style="color:var(--gold)">Unlimited</td></tr>
+          <tr><td>Search ranking boost</td><td class="check-no">✗</td><td class="check-yes">✦</td><td class="check-yes">✦ Priority</td></tr>
+          <tr><td>Analytics dashboard</td><td class="check-no">✗</td><td class="check-yes">✦ Basic</td><td class="check-yes">✦ Advanced</td></tr>
+          <tr><td>Featured listing</td><td class="check-no">✗</td><td class="check-no">✗</td><td class="check-yes">✦</td></tr>
+          <tr><td>Priority support</td><td class="check-no">✗</td><td class="check-no">✗</td><td class="check-yes">✦</td></tr>
+          <tr><td>Pro Artist badge</td><td class="check-no">✗</td><td class="check-yes">✦</td><td class="check-yes">✦</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <footer style="margin-top:60px"><div class="footer-bottom"><span>© 2025 HiddenGrooves</span></div></footer>
+</div>
+
+<!-- ===================== BOOKING PAGE ===================== -->
+<div id="page-booking" class="page">
+  <section style="padding-top:120px">
+    <div class="section-header">
+      <div class="section-label">Book a Performer</div>
+      <h1 class="section-title display">Request a Booking</h1>
+      <p class="section-sub">Fill in your event details and we'll connect you with the perfect artist.</p>
+    </div>
+    <div class="booking-layout">
+      <div class="card-box fade-in">
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:24px;color:var(--text)">Event Details</h3>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Your Name</label>
+            <input type="text" class="form-input" placeholder="Full name">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-input" placeholder="you@email.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Event Type</label>
+          <select class="form-select">
+            <option value="">Select event type</option>
+            <option>Wedding</option><option>Corporate Event</option><option>Cultural Festival</option>
+            <option>Birthday Celebration</option><option>Religious Ceremony</option>
+            <option>Concert / Show</option><option>Other</option>
+          </select>
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Event Date</label>
+            <input type="date" class="form-input">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Event Time</label>
+            <input type="time" class="form-input">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Event Location</label>
+          <input type="text" class="form-input" placeholder="City, Venue name or address">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Budget (INR)</label>
+          <select class="form-select">
+            <option>Under ₹5,000</option><option>₹5,000 – ₹10,000</option>
+            <option>₹10,000 – ₹25,000</option><option>₹25,000 – ₹50,000</option><option>₹50,000+</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Performance Type Required</label>
+          <select class="form-select">
+            <option>Classical Dance</option><option>Folk Dance</option><option>Contemporary Dance</option>
+            <option>Live Music</option><option>Fusion Performance</option><option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Additional Notes</label>
+          <textarea class="form-textarea" placeholder="Any special requirements, themes, or details about your event…"></textarea>
+        </div>
+        <button class="btn btn-gold btn-lg" style="width:100%;justify-content:center" onclick="showBookingConfirm()">✦ Submit Booking Request</button>
+      </div>
+
+      <div>
+        <div class="card-box fade-in">
+          <h3>Booking a Specific Artist?</h3>
+          <p style="font-size:.875rem;color:var(--text2);margin-bottom:16px">If you'd like to request a particular artist, enter their name below.</p>
+          <div class="form-group">
+            <label class="form-label">Artist Name</label>
+            <input type="text" class="form-input" placeholder="e.g. Priya Nair" value="Priya Nair">
+          </div>
+          <div style="padding:16px;background:rgba(212,168,67,0.05);border-radius:10px;border:1px solid var(--border);display:flex;align-items:center;gap:12px">
+            <div style="font-size:2rem">💃</div>
+            <div><div style="font-weight:600;font-size:.9rem">Priya Nair</div><div style="font-size:.78rem;color:var(--gold)">Pro Artist • Bengaluru</div><div style="font-size:.78rem;color:var(--text3)">★ 4.9 • Usually responds in &lt;2 hrs</div></div>
+          </div>
+        </div>
+        <div class="card-box fade-in">
+          <h3>How It Works</h3>
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <div style="display:flex;gap:14px;align-items:flex-start">
+              <div style="width:32px;height:32px;background:rgba(212,168,67,0.1);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;color:var(--gold)">1</div>
+              <div><div style="font-size:.875rem;font-weight:500;margin-bottom:4px">Submit Request</div><div style="font-size:.8rem;color:var(--text2)">Fill out your event details and send the booking request.</div></div>
+            </div>
+            <div style="display:flex;gap:14px;align-items:flex-start">
+              <div style="width:32px;height:32px;background:rgba(212,168,67,0.1);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;color:var(--gold)">2</div>
+              <div><div style="font-size:.875rem;font-weight:500;margin-bottom:4px">Artist Responds</div><div style="font-size:.8rem;color:var(--text2)">The artist reviews and responds within 24 hours.</div></div>
+            </div>
+            <div style="display:flex;gap:14px;align-items:flex-start">
+              <div style="width:32px;height:32px;background:rgba(212,168,67,0.1);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;color:var(--gold)">3</div>
+              <div><div style="font-size:.875rem;font-weight:500;margin-bottom:4px">Confirm &amp; Pay</div><div style="font-size:.8rem;color:var(--text2)">Agree on terms, confirm via the platform, and pay securely.</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer style="margin-top:60px"><div class="footer-bottom"><span>© 2025 HiddenGrooves</span></div></footer>
+</div>
+
+<!-- ===================== LOGIN PAGE ===================== -->
+<div id="page-login" class="page">
+  <div class="auth-container">
+    <div class="auth-box fade-in">
+      <div style="text-align:center;margin-bottom:32px">
+        <div class="nav-logo" style="justify-content:center;margin-bottom:12px">
+          <div class="nav-logo-icon">H</div>
+          <span class="nav-logo-text">HiddenGrooves</span>
+        </div>
+      </div>
+      <div class="auth-tabs">
+        <div class="auth-tab active" onclick="switchAuthTab(this,'signin')">Sign In</div>
+        <div class="auth-tab" onclick="switchAuthTab(this,'signup')">Create Account</div>
+      </div>
+
+      <!-- SIGN IN -->
+      <div id="authSignin">
+        <div class="auth-type-tabs">
+          <div class="type-tab active" onclick="this.parentNode.querySelectorAll('.type-tab').forEach(t=>t.classList.remove('active'));this.classList.add('active')">🎭 Artist</div>
+          <div class="type-tab" onclick="this.parentNode.querySelectorAll('.type-tab').forEach(t=>t.classList.remove('active'));this.classList.add('active')">📋 Organizer</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" id="loginEmail" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-input" id="loginPassword" placeholder="••••••••">
+        </div>
+        <div style="font-size:.78rem;color:var(--gold);text-align:right;margin:-10px 0 20px;cursor:pointer">Forgot password?</div>
+        <button class="btn btn-gold" style="width:100%;justify-content:center;padding:14px" onclick="handleLogin()">Sign In →</button>
+        <div style="margin-top:16px;font-size:.8rem;color:var(--text3);text-align:center">Admin access: <span style="color:var(--gold)">admin@hiddengrooves.com</span> / <span style="color:var(--gold)">Admin@123</span></div>
+      </div>
+
+      <!-- SIGN UP -->
+      <div id="authSignup" style="display:none">
+        <div class="auth-type-tabs">
+          <div class="type-tab active" id="signupArtistTab" onclick="setSignupType('artist')">🎭 Artist</div>
+          <div class="type-tab" id="signupOrgTab" onclick="setSignupType('organizer')">📋 Organizer</div>
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">First Name</label>
+            <input type="text" class="form-input" placeholder="First name">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name</label>
+            <input type="text" class="form-input" placeholder="Last name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-input" placeholder="Create a strong password">
+        </div>
+        <div id="artistSignupField" class="form-group">
+          <label class="form-label">Performance Category</label>
+          <select class="form-select">
+            <option>Classical Dance</option><option>Folk Dance</option><option>Contemporary</option>
+            <option>Live Music</option><option>Theatre</option><option>Other</option>
+          </select>
+        </div>
+        <div id="orgSignupField" class="form-group" style="display:none">
+          <label class="form-label">Organization Name</label>
+          <input type="text" class="form-input" placeholder="Your company or event name">
+        </div>
+        <button class="btn btn-gold" style="width:100%;justify-content:center;padding:14px" onclick="showToast('Account created! Welcome to HiddenGrooves ✦');showPage('dashboard')">Create Account →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== DASHBOARD PAGE ===================== -->
+<div id="page-dashboard" class="page">
+  <div class="dashboard-layout">
+    <div class="dashboard-sidebar">
+      <div style="padding:0 24px 24px;border-bottom:1px solid var(--border);margin-bottom:16px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:44px;height:44px;background:linear-gradient(135deg,var(--gold),var(--purple));border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem;color:#0a0a0f" id="dashAvatar">P</div>
+          <div><div style="font-weight:600;font-size:.9rem" id="dashName">Priya Nair</div><div style="font-size:.75rem;color:var(--gold)" id="dashRole">Pro Artist</div></div>
+        </div>
+      </div>
+      <ul class="dash-nav" id="dashNav">
+        <li class="active"><button onclick="switchDashTab('overview',this)"><span class="dash-icon">📊</span> Overview</button></li>
+        <li><button onclick="switchDashTab('profile',this)"><span class="dash-icon">👤</span> My Profile</button></li>
+        <li><button onclick="switchDashTab('media',this)"><span class="dash-icon">🎬</span> Media &amp; Videos</button></li>
+        <li><button onclick="switchDashTab('bookings',this)"><span class="dash-icon">📅</span> Bookings</button></li>
+        <li><button onclick="switchDashTab('subscription',this)"><span class="dash-icon">⭐</span> Subscription</button></li>
+        <li><button onclick="switchDashTab('favorites',this)"><span class="dash-icon">❤️</span> Saved Artists</button></li>
+        <li style="margin-top:auto;padding-top:32px"><button onclick="showPage('home')" style="color:var(--text3)!important"><span class="dash-icon">🚪</span> Sign Out</button></li>
+      </ul>
+      <div id="adminDashSection" style="display:none;padding:16px 24px;margin-top:16px;border-top:1px solid var(--border)">
+        <div style="font-size:.72rem;color:#ef4444;letter-spacing:1px;text-transform:uppercase;font-weight:600;margin-bottom:10px">⚙ Admin Panel</div>
+        <ul class="dash-nav" style="margin:0">
+          <li><button onclick="switchDashTab('admin',this)" style="padding:10px 0"><span class="dash-icon">🛡</span> Admin Tools</button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="dashboard-main">
+
+      <!-- OVERVIEW TAB -->
+      <div id="dash-overview" class="dash-tab">
+        <div class="dash-greeting display" id="dashGreeting">Good evening, Priya ✦</div>
+        <div class="dash-sub">Here's how your profile is performing this month.</div>
+        <div class="metrics-grid">
+          <div class="metric-card"><span class="metric-val">2,840</span><div class="metric-label">Profile Views</div></div>
+          <div class="metric-card"><span class="metric-val">18</span><div class="metric-label">Booking Requests</div></div>
+          <div class="metric-card"><span class="metric-val">6</span><div class="metric-label">Confirmed Events</div></div>
+          <div class="metric-card"><span class="metric-val">₹94k</span><div class="metric-label">Total Earnings</div></div>
+        </div>
+        <div class="card-box">
+          <h3 style="margin-bottom:20px">Recent Booking Requests</h3>
+          <table class="recent-table">
+            <thead><tr><th>Event</th><th>Organizer</th><th>Date</th><th>Budget</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Wedding Ceremony</td><td>Ramesh Verma</td><td>Apr 15</td><td>₹22,000</td><td><span class="status-badge status-confirmed">Confirmed</span></td></tr>
+              <tr><td>Corporate Gala</td><td>TCS Events</td><td>Apr 22</td><td>₹18,000</td><td><span class="status-badge status-pending">Pending</span></td></tr>
+              <tr><td>Cultural Festival</td><td>Mumbai Arts</td><td>May 3</td><td>₹15,000</td><td><span class="status-badge status-pending">Pending</span></td></tr>
+              <tr><td>Birthday Party</td><td>Anjali S.</td><td>Mar 28</td><td>₹8,000</td><td><span class="status-badge status-confirmed">Confirmed</span></td></tr>
+              <tr><td>Private Show</td><td>Khanna Group</td><td>Mar 10</td><td>₹12,000</td><td><span class="status-badge status-cancelled">Cancelled</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PROFILE TAB -->
+      <div id="dash-profile" class="dash-tab" style="display:none">
+        <div class="dash-greeting display">Edit Your Profile</div>
+        <div class="dash-sub">Keep your profile updated to attract more bookings.</div>
+        <div class="card-box">
+          <div class="form-group"><label class="form-label">Display Name</label><input type="text" class="form-input" value="Priya Nair"></div>
+          <div class="form-group"><label class="form-label">Performance Category</label><select class="form-select"><option>Classical Dance</option><option>Folk Dance</option><option>Contemporary</option></select></div>
+          <div class="form-group"><label class="form-label">City</label><input type="text" class="form-input" value="Bengaluru"></div>
+          <div class="form-group"><label class="form-label">Bio</label><textarea class="form-textarea">Priya Nair is an award-winning classical dancer with over 15 years of training in Bharatanatyam and Kuchipudi…</textarea></div>
+          <div class="form-group"><label class="form-label">Starting Price (₹)</label><input type="number" class="form-input" value="8000"></div>
+          <button class="btn btn-gold" onclick="showToast('Profile saved successfully ✦')">Save Changes</button>
+        </div>
+      </div>
+
+      <!-- MEDIA TAB -->
+      <div id="dash-media" class="dash-tab" style="display:none">
+        <div class="dash-greeting display">Media &amp; Videos</div>
+        <div class="dash-sub">Showcase your talent through videos and photos.</div>
+        <div class="card-box">
+          <h3 style="margin-bottom:16px">Upload New Media</h3>
+          <div style="border:2px dashed var(--border);border-radius:12px;padding:48px;text-align:center;cursor:pointer;transition:border-color .2s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
+            <div style="font-size:2.5rem;margin-bottom:12px">📁</div>
+            <div style="font-size:.9rem;color:var(--text2)">Drag &amp; drop files here, or click to browse</div>
+            <div style="font-size:.78rem;color:var(--text3);margin-top:8px">Supports MP4, MOV, JPG, PNG — max 100MB per file</div>
+            <button class="btn btn-ghost" style="margin-top:16px" onclick="showToast('File upload coming soon!')">Browse Files</button>
+          </div>
+          <div style="margin-top:24px">
+            <div style="font-size:.82rem;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;font-weight:600">Uploaded Videos (2/5)</div>
+            <div class="video-grid">
+              <div class="video-thumb" style="background:linear-gradient(135deg,#1a0a2e,#3d1a6e)"><div class="video-play">▶</div></div>
+              <div class="video-thumb" style="background:linear-gradient(135deg,#0a1a2e,#1a3a6e)"><div class="video-play">▶</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOOKINGS TAB -->
+      <div id="dash-bookings" class="dash-tab" style="display:none">
+        <div class="dash-greeting display">Booking Requests</div>
+        <div class="dash-sub">Manage and respond to all your booking inquiries.</div>
+        <div class="card-box">
+          <table class="recent-table" style="width:100%">
+            <thead><tr><th>Event</th><th>Organizer</th><th>Date</th><th>Budget</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr><td>Wedding</td><td>Ramesh V.</td><td>Apr 15</td><td>₹22,000</td><td><span class="status-badge status-confirmed">Confirmed</span></td><td><button class="btn btn-ghost" style="padding:4px 10px;font-size:.75rem">Message</button></td></tr>
+              <tr><td>Corporate Gala</td><td>TCS Events</td><td>Apr 22</td><td>₹18,000</td><td><span class="status-badge status-pending">Pending</span></td><td style="display:flex;gap:6px;padding:14px 16px"><button class="btn btn-gold" style="padding:4px 10px;font-size:.75rem" onclick="showToast('Booking accepted!')">Accept</button><button class="btn btn-ghost" style="padding:4px 10px;font-size:.75rem">Decline</button></td></tr>
+              <tr><td>Cultural Festival</td><td>Mumbai Arts</td><td>May 3</td><td>₹15,000</td><td><span class="status-badge status-pending">Pending</span></td><td><button class="btn btn-gold" style="padding:4px 10px;font-size:.75rem" onclick="showToast('Booking accepted!')">Accept</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SUBSCRIPTION TAB -->
+      <div id="dash-subscription" class="dash-tab" style="display:none">
+        <div class="dash-greeting display">Your Subscription</div>
+        <div class="dash-sub">Manage your plan and unlock more opportunities.</div>
+        <div class="card-box" style="border-color:var(--gold)">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+            <div>
+              <div style="font-size:.75rem;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">Current Plan</div>
+              <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--gold)">Pro Artist</div>
+              <div style="font-size:.875rem;color:var(--text2);margin-top:4px">Renews on May 1, 2025 &nbsp;•&nbsp; ₹499/month</div>
+            </div>
+            <button class="btn btn-gold" onclick="showPage('pricing')">Upgrade to Premium</button>
+          </div>
+        </div>
+        <div class="pricing-grid" style="margin-top:0">
+          <div class="pricing-card" style="opacity:0.6">
+            <div class="plan-name">Free</div>
+            <div class="plan-price">₹0 <span>/ month</span></div>
+            <button class="btn btn-ghost" style="width:100%;justify-content:center" disabled>Current plan below this</button>
+          </div>
+          <div class="pricing-card" style="border-color:var(--gold)">
+            <div class="plan-name">Pro ✦ Current</div>
+            <div class="plan-price">₹499 <span>/ month</span></div>
+            <button class="btn btn-outline-gold" style="width:100%;justify-content:center">Manage Plan</button>
+          </div>
+          <div class="pricing-card">
+            <div class="plan-name">Premium</div>
+            <div class="plan-price">₹999 <span>/ month</span></div>
+            <button class="btn btn-purple" style="width:100%;justify-content:center" onclick="showToast('Upgrading to Premium…')">Upgrade Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SAVED ARTISTS (Organizer view) -->
+      <div id="dash-favorites" class="dash-tab" style="display:none">
+        <div class="dash-greeting display">Saved Artists</div>
+        <div class="dash-sub">Artists you've bookmarked for future events.</div>
+        <div class="artists-grid">
+          <div class="artist-card" onclick="showPage('profile')">
+            <div class="artist-card-img"><div style="width:100%;height:100%;background:linear-gradient(135deg,#1a0a2e,#3d1a6e);display:flex;align-items:center;justify-content:center;font-size:3rem">💃</div><div class="overlay"></div><span class="artist-category-badge badge-dancer">Dancer</span></div>
+            <div class="artist-card-body"><div class="artist-name display">Priya Nair</div><div class="artist-location">📍 Bengaluru</div><div class="artist-meta"><div class="rating">★ 4.9</div><div class="price" style="color:var(--gold)">₹8,000</div></div></div>
+          </div>
+          <div class="artist-card" onclick="showPage('profile')">
+            <div class="artist-card-img"><div style="width:100%;height:100%;background:linear-gradient(135deg,#0a1a2e,#1a3a6e);display:flex;align-items:center;justify-content:center;font-size:3rem">🎸</div><div class="overlay"></div><span class="artist-category-badge badge-musician">Musician</span></div>
+            <div class="artist-card-body"><div class="artist-name display">Arjun Sharma</div><div class="artist-location">📍 Mumbai</div><div class="artist-meta"><div class="rating">★ 4.8</div><div class="price" style="color:var(--gold)">₹12,000</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADMIN TAB -->
+      <div id="dash-admin" class="dash-tab" style="display:none">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+          <div class="dash-greeting display" style="margin-bottom:0">Admin Panel</div>
+          <span class="admin-badge">⚙ Developer Access</span>
+        </div>
+        <div class="dash-sub">Full platform control. Use with care.</div>
+        <div style="background:rgba(239,68,68,0.05);border:1px solid rgba(239,68,68,0.2);border-radius:12px;padding:16px;margin-bottom:32px;font-size:.875rem;color:var(--text2)">
+          ⚠️ <strong style="color:#ef4444">Admin credentials:</strong> Email: <span style="color:var(--gold)">admin@hiddengrooves.com</span> &nbsp;|&nbsp; Password: <span style="color:var(--gold)">Admin@123</span>. Keep these confidential.
+        </div>
+        <div class="metrics-grid">
+          <div class="metric-card"><span class="metric-val">1,243</span><div class="metric-label">Total Artists</div></div>
+          <div class="metric-card"><span class="metric-val">892</span><div class="metric-label">Organizers</div></div>
+          <div class="metric-card"><span class="metric-val">438</span><div class="metric-label">Active Bookings</div></div>
+          <div class="metric-card"><span class="metric-val">₹4.2M</span><div class="metric-label">Platform Revenue</div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-bottom:32px">
+          <button class="btn btn-ghost" style="justify-content:center;padding:14px" onclick="showToast('Opening user management…')">👥 Manage Users</button>
+          <button class="btn btn-ghost" style="justify-content:center;padding:14px" onclick="showToast('Opening artist approvals…')">✅ Approve Artists</button>
+          <button class="btn btn-ghost" style="justify-content:center;padding:14px" onclick="showToast('Opening content manager…')">📝 Edit Content</button>
+          <button class="btn btn-ghost" style="justify-content:center;padding:14px" onclick="showToast('Opening subscription manager…')">💳 Manage Plans</button>
+          <button class="btn btn-ghost" style="justify-content:center;padding:14px" onclick="showToast('Opening analytics…')">📊 Analytics</button>
+          <button class="btn btn-ghost" style="justify-content:center;padding:14px" onclick="showToast('Opening settings…')">⚙️ Platform Settings</button>
+        </div>
+        <div class="card-box">
+          <h3 style="color:#ef4444;margin-bottom:16px">Recent User Activity</h3>
+          <table class="recent-table" style="width:100%">
+            <thead><tr><th>User</th><th>Action</th><th>Time</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Priya Nair</td><td>Profile updated</td><td>2 min ago</td><td><span class="status-badge status-confirmed">OK</span></td></tr>
+              <tr><td>Ravi K.</td><td>New booking request</td><td>15 min ago</td><td><span class="status-badge status-pending">Pending</span></td></tr>
+              <tr><td>Arjun Sharma</td><td>Video uploaded</td><td>1 hr ago</td><td><span class="status-badge status-confirmed">OK</span></td></tr>
+              <tr><td>Unknown user</td><td>Failed login attempt</td><td>2 hr ago</td><td><span class="status-badge status-cancelled">Alert</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===================== ABOUT PAGE ===================== -->
+<div id="page-about" class="page">
+  <div class="about-hero">
+    <div style="position:relative;z-index:1">
+      <div class="section-label">Our Story</div>
+      <h1 class="display" style="font-size:clamp(2.5rem,6vw,4.5rem);font-weight:900;margin-bottom:20px">We Believe Every Artist<br><span style="background:linear-gradient(135deg,var(--gold),var(--purple3));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Deserves a Stage</span></h1>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--text2);max-width:600px;margin:0 auto;line-height:1.7">HiddenGrooves was born from a simple truth: India overflows with extraordinary talent that the world has never seen.</p>
+    </div>
+  </div>
+  <section style="padding-top:0">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-bottom:80px;flex-wrap:wrap" class="fade-in">
+      <div>
+        <div class="section-label">The Problem We're Solving</div>
+        <h2 class="display" style="font-size:2rem;margin-bottom:16px">Talent Hidden in Plain Sight</h2>
+        <p style="color:var(--text2);line-height:1.8;margin-bottom:16px">Across India, thousands of brilliantly trained dancers, musicians, and performers spend their careers performing at local functions — never receiving the visibility, fair pay, or professional opportunities they've earned.</p>
+        <p style="color:var(--text2);line-height:1.8">Meanwhile, event organizers struggle to find authentic, talented artists beyond the same overexposed names. HiddenGrooves bridges this gap with a transparent, professional marketplace built specifically for the performing arts.</p>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:40px;text-align:center">
+        <div style="font-size:4rem;margin-bottom:20px">🎭</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;margin-bottom:12px">Our Mission</div>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--text2);line-height:1.7;font-style:italic">"To ensure that no talented artist remains unseen, and that every event is elevated by authentic, extraordinary performance."</p>
+      </div>
+    </div>
+    <div class="section-label">What We Stand For</div>
+    <h2 class="display" style="font-size:2rem;margin-bottom:40px">Our Core Values</h2>
+    <div class="values-grid fade-in">
+      <div class="value-card">
+        <div class="value-icon">✦</div>
+        <div class="value-title display">Authenticity</div>
+        <div class="value-desc">We celebrate artists for exactly who they are — no filters, no fabrication. Genuine talent stands on its own.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">⚖️</div>
+        <div class="value-title display">Fair Opportunity</div>
+        <div class="value-desc">Every artist on our platform receives equal opportunity to be discovered, regardless of how established they are.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🌐</div>
+        <div class="value-title display">Visibility</div>
+        <div class="value-desc">We invest in surfaces that put talented artists in front of the audiences and organizers who need them most.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🤝</div>
+        <div class="value-title display">Community</div>
+        <div class="value-desc">We build relationships, not just transactions. Artists and organizers who meet here often work together for years.</div>
+      </div>
+    </div>
+  </section>
+  <footer><div class="footer-bottom"><span>© 2025 HiddenGrooves</span><button class="btn btn-ghost" onclick="showPage('home')" style="font-size:.8rem;padding:6px 14px">← Back to Home</button></div></footer>
+</div>
+
+<!-- ===================== CONTACT PAGE ===================== -->
+<div id="page-contact" class="page">
+  <section style="padding-top:120px">
+    <div class="section-header">
+      <div class="section-label">Get In Touch</div>
+      <h1 class="section-title display">We'd Love to Hear From You</h1>
+      <p class="section-sub">Questions, partnerships, or just a hello — reach out anytime.</p>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <div class="card-box fade-in">
+          <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:24px;color:var(--text)">Send a Message</h3>
+          <div class="form-group"><label class="form-label">Your Name</label><input type="text" class="form-input" placeholder="Full name"></div>
+          <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="you@email.com"></div>
+          <div class="form-group"><label class="form-label">Subject</label><select class="form-select"><option>General Inquiry</option><option>Artist Support</option><option>Organizer Support</option><option>Billing &amp; Subscriptions</option><option>Partnership</option><option>Press &amp; Media</option></select></div>
+          <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="Tell us how we can help…"></textarea></div>
+          <button class="btn btn-gold" onclick="showToast('Message sent! We\'ll respond within 24 hours ✦')" style="width:100%;justify-content:center">Send Message</button>
+        </div>
+      </div>
+      <div>
+        <div class="fade-in" style="margin-bottom:40px">
+          <h3 class="display" style="font-size:1.3rem;margin-bottom:24px">Contact Info</h3>
+          <div class="contact-info-item">
+            <div class="contact-icon">✉️</div>
+            <div><div style="font-weight:600;font-size:.9rem;margin-bottom:2px">Email Us</div><div style="font-size:.875rem;color:var(--text2)">hello@hiddengrooves.com</div></div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-icon">📞</div>
+            <div><div style="font-weight:600;font-size:.9rem;margin-bottom:2px">Call Us</div><div style="font-size:.875rem;color:var(--text2)">+91 80 4567 8900</div></div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-icon">📍</div>
+            <div><div style="font-weight:600;font-size:.9rem;margin-bottom:2px">Office</div><div style="font-size:.875rem;color:var(--text2)">91Springboard, Bengaluru, Karnataka 560001</div></div>
+          </div>
+          <div class="social-links">
+            <a class="social-btn" title="Instagram">📸</a>
+            <a class="social-btn" title="Twitter">🐦</a>
+            <a class="social-btn" title="YouTube">▶️</a>
+            <a class="social-btn" title="LinkedIn">💼</a>
+          </div>
+        </div>
+        <div class="fade-in">
+          <h3 class="display" style="font-size:1.3rem;margin-bottom:20px">Frequently Asked Questions</h3>
+          <div id="faqContainer">
+            <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How do I join as an artist?</div><div class="faq-a">Simply click "Join as an Artist" and create a free account. Set up your profile, upload a performance video, and you're live. You can upgrade to Pro or Premium at any time for greater visibility.</div></div>
+            <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Is HiddenGrooves free to use?</div><div class="faq-a">Yes! Both artists and organizers can create free accounts. Paid subscriptions unlock premium features like priority search ranking, unlimited media uploads, and full booking tools.</div></div>
+            <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How does the booking process work?</div><div class="faq-a">Organizers submit a booking request specifying event details, date, and budget. The artist reviews the request and accepts or declines within 24 hours. Once accepted, both parties communicate through the platform to finalize details.</div></div>
+            <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What is the cancellation policy?</div><div class="faq-a">Cancellation policies vary by artist. Each artist profile displays their specific terms. We recommend confirming cancellation policies before finalizing a booking. Subscriptions can be cancelled anytime.</div></div>
+            <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can I upgrade or downgrade my plan?</div><div class="faq-a">Absolutely. You can upgrade, downgrade, or cancel your subscription at any time from your dashboard under the Subscription tab.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer style="margin-top:60px"><div class="footer-bottom"><span>© 2025 HiddenGrooves. All rights reserved.</span></div></footer>
+</div>
+
+<!-- TOAST -->
+<div class="toast hidden" id="toast">
+  <span style="color:var(--gold)">✦</span>
+  <span id="toastMsg">Success!</span>
+</div>
+
+<!-- BOOKING CONFIRM MODAL -->
+<div class="modal-overlay hidden" id="bookingModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div style="text-align:center">
+      <div style="font-size:3rem;margin-bottom:16px">🎉</div>
+      <h2 class="display" style="font-size:1.8rem;margin-bottom:12px">Booking Request Sent!</h2>
+      <p style="color:var(--text2);font-size:.9rem;line-height:1.7;margin-bottom:28px">Your request has been sent to <strong>Priya Nair</strong>. She'll respond within 24 hours. You'll receive a confirmation email shortly.</p>
+      <div style="background:rgba(212,168,67,0.05);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:28px;text-align:left">
+        <div style="font-size:.78rem;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px">Booking Reference</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--gold)">#HG-2025-0847</div>
+      </div>
+      <button class="btn btn-gold btn-lg" style="width:100%;justify-content:center" onclick="closeModal();showPage('dashboard')">View in Dashboard</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ==================== PAGE ROUTING ====================
+  function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const page = document.getElementById('page-' + pageId);
+    if (page) {
+      page.classList.add('active');
+      window.scrollTo(0, 0);
+    }
+    initFadeIns();
+    if (pageId === 'explore') populateExplore();
+    if (pageId === 'profile') buildCalendar();
+  }
+
+  // ==================== AUTH ====================
+  let currentUser = null;
+  let signupType = 'artist';
+
+  function setSignupType(type) {
+    signupType = type;
+    document.getElementById('artistSignupField').style.display = type === 'artist' ? 'block' : 'none';
+    document.getElementById('orgSignupField').style.display = type === 'organizer' ? 'block' : 'none';
+    document.getElementById('signupArtistTab').classList.toggle('active', type === 'artist');
+    document.getElementById('signupOrgTab').classList.toggle('active', type === 'organizer');
+  }
+
+  function handleLogin() {
+    const email = document.getElementById('loginEmail').value.trim();
+    const pass = document.getElementById('loginPassword').value.trim();
+
+    if (email === 'admin@hiddengrooves.com' && pass === 'Admin@123') {
+      currentUser = { name: 'Admin', role: 'Admin', type: 'admin' };
+      document.getElementById('adminBadgeNav').style.display = 'inline-flex';
+      document.getElementById('adminDashSection').style.display = 'block';
+      document.getElementById('dashName').textContent = 'Admin';
+      document.getElementById('dashRole').textContent = 'Platform Administrator';
+      document.getElementById('dashAvatar').textContent = 'A';
+      document.getElementById('dashGreeting').textContent = 'Welcome back, Admin ⚙';
+      document.getElementById('navLoginBtn').textContent = 'Admin ✦';
+      showToast('Welcome back, Admin! ⚙');
+      showPage('dashboard');
+      switchDashTab('admin', null);
+      return;
+    }
+
+    if (email && pass.length >= 6) {
+      currentUser = { name: 'Priya Nair', role: 'Pro Artist', type: 'artist' };
+      document.getElementById('navLoginBtn').textContent = 'Dashboard';
+      document.getElementById('navLoginBtn').onclick = () => showPage('dashboard');
+      showToast('Welcome back, Priya! ✦');
+      showPage('dashboard');
+    } else {
+      showToast('Please enter valid credentials');
+    }
+  }
+
+  function switchAuthTab(el, tab) {
+    document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('authSignin').style.display = tab === 'signin' ? 'block' : 'none';
+    document.getElementById('authSignup').style.display = tab === 'signup' ? 'block' : 'none';
+  }
+
+  // ==================== DASHBOARD ====================
+  function switchDashTab(tab, el) {
+    document.querySelectorAll('.dash-tab').forEach(t => t.style.display = 'none');
+    const target = document.getElementById('dash-' + tab);
+    if (target) target.style.display = 'block';
+    if (el) {
+      document.querySelectorAll('.dash-nav li').forEach(li => li.classList.remove('active'));
+      el.closest('li').classList.add('active');
+    }
+  }
+
+  // ==================== PRICING ====================
+  function switchPricingTab(el, type) {
+    document.querySelectorAll('.pricing-tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('artistPlans').style.display = type === 'artist' ? 'block' : 'none';
+    document.getElementById('organizerPlans').style.display = type === 'organizer' ? 'block' : 'none';
+  }
+
+  // ==================== EXPLORE GRID ====================
+  const artistsData = [
+    { name:'Priya Nair', cat:'Classical Dancer', catClass:'dancer', loc:'Bengaluru', rating:'4.9', reviews:124, price:'₹8,000', emoji:'💃' },
+    { name:'Arjun Sharma', cat:'Guitarist', catClass:'musician', loc:'Mumbai', rating:'4.8', reviews:89, price:'₹12,000', emoji:'🎸' },
+    { name:'Meera Pillai', cat:'Theatre Artist', catClass:'performer', loc:'Chennai', rating:'5.0', reviews:67, price:'₹15,000', emoji:'🎭' },
+    { name:'Karan Mehta', cat:'Tabla Player', catClass:'musician', loc:'Delhi', rating:'4.7', reviews:52, price:'₹6,500', emoji:'🪘' },
+    { name:'Sunita Rao', cat:'Folk Dancer', catClass:'dancer', loc:'Hyderabad', rating:'4.9', reviews:103, price:'₹7,500', emoji:'🪷' },
+    { name:'Vikram Joshi', cat:'Comedian', catClass:'performer', loc:'Pune', rating:'4.6', reviews:78, price:'₹10,000', emoji:'🎤' },
+    { name:'Asha Devi', cat:'Bharatanatyam', catClass:'dancer', loc:'Jaipur', rating:'5.0', reviews:45, price:'₹9,000', emoji:'🌸' },
+    { name:'Rahul Das', cat:'Flutist', catClass:'musician', loc:'Kolkata', rating:'4.8', reviews:61, price:'₹5,500', emoji:'🪗' },
+  ];
+  const gradients = ['linear-gradient(135deg,#1a0a2e,#3d1a6e)','linear-gradient(135deg,#0a1a2e,#1a3a6e)','linear-gradient(135deg,#1a1a0a,#4e3a0a)','linear-gradient(135deg,#2e0a1a,#6e1a3d)','linear-gradient(135deg,#0a2e1a,#1a6e3d)','linear-gradient(135deg,#2e2e0a,#5e5a0a)','linear-gradient(135deg,#0a2e2e,#0a5e5e)','linear-gradient(135deg,#1a0a1a,#4e0a4e)'];
+
+  function populateExplore() {
+    const grid = document.getElementById('exploreGrid');
+    if (!grid || grid.children.length > 0) return;
+    grid.innerHTML = artistsData.map((a,i) => `
+      <div class="artist-card fade-in" onclick="showPage('profile')">
+        <div class="artist-card-img">
+          <div style="width:100%;height:100%;${gradients[i]};display:flex;align-items:center;justify-content:center;font-size:4rem">${a.emoji}</div>
+          <div class="overlay"></div>
+          <span class="artist-category-badge badge-${a.catClass}">${a.cat}</span>
+        </div>
+        <div class="artist-card-body">
+          <div class="artist-name display">${a.name}</div>
+          <div class="artist-location">📍 ${a.loc}</div>
+          <div class="artist-meta">
+            <div class="rating">★${a.rating} <span style="color:var(--text3)">(${a.reviews})</span></div>
+            <div class="price" style="color:var(--gold)">${a.price}/event</div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+    initFadeIns();
+  }
+
+  // ==================== CALENDAR ====================
+  function buildCalendar() {
+    const cal = document.getElementById('miniCalendar');
+    if (!cal || cal.children.length > 0) return;
+    const booked = [3,7,12,18,21,25,28];
+    for (let i = 1; i <= 30; i++) {
+      const d = document.createElement('div');
+      d.className = 'cal-day';
+      d.textContent = i;
+      if (i === 10) d.classList.add('today');
+      else if (booked.includes(i)) d.classList.add('booked');
+      else d.classList.add('available');
+      cal.appendChild(d);
+    }
+  }
+
+  // ==================== TOASTS ====================
+  let toastTimer;
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    document.getElementById('toastMsg').textContent = msg;
+    toast.classList.remove('hidden');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.add('hidden'), 3500);
+  }
+
+  // ==================== MODAL ====================
+  function showBookingConfirm() {
+    document.getElementById('bookingModal').classList.remove('hidden');
+  }
+  function closeModal() {
+    document.getElementById('bookingModal').classList.add('hidden');
+  }
+
+  // ==================== FAQ ====================
+  function toggleFaq(el) {
+    el.closest('.faq-item').classList.toggle('open');
+  }
+
+  // ==================== MOBILE MENU ====================
+  function toggleMobileMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // ==================== FADE-IN OBSERVER ====================
+  function initFadeIns() {
+    setTimeout(() => {
+      const els = document.querySelectorAll('.fade-in:not(.visible)');
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin:'0px 0px -40px 0px' });
+      els.forEach(el => obs.observe(el));
+    }, 100);
+  }
+
+  // ==================== INIT ====================
+  document.addEventListener('DOMContentLoaded', () => {
+    initFadeIns();
+    buildCalendar();
+  });
+</script>
+</body>
+</html>
